@@ -37,6 +37,7 @@
   <button v-on:click="decrement">Decrement</button>
   <!-- Shorthand is v-on: replaced with @. Also v-on directives have access to an identifier named $event -->
   <button @click="increment($event)">Increment</button>
+  <h2>{{ fullName }}</h2>
 </template>
 
 <script>
@@ -60,8 +61,16 @@ export default {
         a: '1',
         b: '2',
         c: '3'
-      }
+      },
+      firstName: 'Yash',
+      lastName: 'Singh'
     };
+  },
+  // Computed properties don't take parameters
+  computed: {
+    fullName() {
+      return `${this.firstName} ${this.lastName}`
+    }
   },
   methods: {
     add(...addends) {
