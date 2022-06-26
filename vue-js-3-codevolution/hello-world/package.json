@@ -32,7 +32,10 @@
     "parserOptions": {
       "parser": "@babel/eslint-parser"
     },
-    "rules": {}
+    "rules": {
+      "no-dupe-keys": "off",
+      "vue/no-dupe-keys": "off"
+    }
   },
   "browserslist": [
     "> 1%",
