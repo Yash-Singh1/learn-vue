@@ -1,6 +1,8 @@
 <!-- This is just a messy playground to try basic concepts -->
 
 <template>
+  <!-- Vue automatically converts kebab case to camel case -->
+  <Greet name="Yash" :movie-name="lastMovie" />
   {{ greet }} {{ name }}
   <div v-text="channel"></div>
   <div>{{ channelHtml }}</div>
@@ -51,9 +53,24 @@
   <template v-for="item in expensiveItems" :key="item.id">
     <h2>{{ item.title }} - ${{ item.price }}</h2>
   </template>
+  <h2>Volume Tracker (0-20)</h2>
+  <h3>Current Volume - {{ volume }}</h3>
+  <div>
+    <button @click="volume += 2">Increase</button>
+    <button @click="volume -= 2">Decrease</button>
+  </div>
+  <input type="text" v-model="movie" />
+  <input type="text" v-model="movieInfo.title" />
+  <input type="text" v-model="movieInfo.actor" />
+  <button @click="movieList.push('Wonder Woman')">Add movie</button>
+  <!-- id is a non-prop attribute -->
+  <Article title="Article Title" likes=50 published id="my-id" />
 </template>
 
 <script>
+import Greet from './components/Greet.vue';
+import Article from './components/Article.vue';
+
 export default {
   name: 'App',
   data() {
@@ -94,6 +111,14 @@ export default {
           price: '2000',
         },
       ],
+      volume: 0,
+      movie: 'Batman',
+      movieInfo: {
+        title: '',
+        actor: '',
+      },
+      movieList: ['Batman', 'Superman'],
+      lastMovie: 'Superman vs. Batman',
     };
   },
   // Computed properties don't take parameters
@@ -134,6 +159,35 @@ export default {
     changeFullName() {
       this.fullName = 'Clark Kent';
     },
+  },
+  watch: {
+    volume(newValue, oldValue) {
+      if (newValue > oldValue && newValue == 16) {
+        alert('Listening to high volumes for a long period of time may damage hearing...');
+      }
+    },
+    movie: {
+      handler(newValue) {
+        console.log(`Calling an API with movie name = ${newValue}`);
+      },
+      immediate: true,
+    },
+    movieInfo: {
+      handler(newValue) {
+        console.log(`Calling API with movie title = ${newValue.title} and actor = ${newValue.actor}`);
+      },
+      deep: true,
+    },
+    movieList: {
+      handler(newValue) {
+        console.log(`Updated list ${newValue}`);
+      },
+      deep: true,
+    },
+  },
+  components: {
+    Greet,
+    Article,
   },
 };
 </script>
