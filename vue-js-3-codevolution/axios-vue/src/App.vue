@@ -1,25 +1,17 @@
 <template>
-  <h2>App Username {{ username }}</h2>
-  <ComponentC />
+  <CreatePost />
+  <PostList />
 </template>
 
 <script>
-import ComponentC from './components/ComponentC.vue';
+import PostList from './components/PostList.vue';
+import CreatePost from './components/CreatePost.vue';
 
 export default {
   name: 'App',
   components: {
-    ComponentC,
-  },
-  data() {
-    return {
-      username: 'Vishwas',
-    };
-  },
-  provide() {
-    return {
-      username: this.username,
-    };
+    PostList,
+    CreatePost,
   },
 };
 </script>

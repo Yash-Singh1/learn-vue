@@ -1,4 +1,4 @@
-# provide-and-inject
+# axios-vue
 
 ## Project setup
 ```

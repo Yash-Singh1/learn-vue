@@ -2,7 +2,7 @@
   <!-- v-once treats an element as static content and doesn't rerender -->
   <h1 v-once>Form</h1>
   <!-- v-pre skips templating for input HTML or speeding up static non-templated content compilation -->
-  <p v-pre>I am not templated: {{name}}</p>
+  <p v-pre>I am not templated: {{ name }}</p>
   <pre><code>{{JSON.stringify(formValues, null, 2)}}</code></pre>
   <!-- Instead we can use the .prevent modifier -->
   <!-- <form @submit="submitForm"> -->
@@ -66,6 +66,7 @@
       <!-- There are event modifiers for different keys in the keyboard events -->
       <input type="number" id="age" v-model.number="formValues.age" @keyup.enter="submitForm" />
     </div>
+    <Input v-model="moreInfo" />
     <div>
       <button>Submit</button>
     </div>
@@ -73,6 +74,8 @@
 </template>
 
 <script>
+import Input from './components/Input.vue';
+
 export default {
   name: 'App',
   data() {
@@ -82,20 +85,24 @@ export default {
         summary: '',
         country: '',
         job_location: [],
-        remoteWork: "no",
+        remoteWork: 'no',
         skillSet: [],
         yearsOfExperience: '',
-        age: null
-      }
-    }
+        age: null,
+      },
+      moreInfo: '',
+    };
   },
   methods: {
     submitForm(event) {
       event.preventDefault();
       console.log('Submitted values', this.formValues);
-    }
-  }
-}
+    },
+  },
+  components: {
+    Input,
+  },
+};
 </script>
 
 <style>
@@ -108,11 +115,12 @@ export default {
   width: 25%;
   margin: 60px auto;
 }
-input[type="checkbox"], input[type="radio"] {
+input[type='checkbox'],
+input[type='radio'] {
   display: inline-block;
   margin-right: 5px;
 }
-label:not([for="remoteWork"], [for="html"], [for="javascript"], [for="css"], [for="0-2"], [for="3-5"], [for="6-10"], [for="10+"]) {
+label:not([for='remoteWork'], [for='html'], [for='javascript'], [for='css'], [for='0-2'], [for='3-5'], [for='6-10'], [for='10+']) {
   display: block;
 }
 </style>
