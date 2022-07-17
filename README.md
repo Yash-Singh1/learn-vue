@@ -1,3 +1,3 @@
 # `learn-vue`
 
-Me learning VueJS.
+Me learning Vue.js.
